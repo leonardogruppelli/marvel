@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { ThumbnailInterface } from "./types";
+import type { ThumbnailProps } from "./types";
 
-const props = defineProps<ThumbnailInterface>();
+const props = defineProps<ThumbnailProps>();
 
 const src = computed<string>(
   () => `${props.thumbnail.path}.${props.thumbnail.extension}`

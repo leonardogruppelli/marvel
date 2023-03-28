@@ -39,11 +39,6 @@ export default defineNuxtConfig({
           "app-icons": FileSystemIconLoader("./assets/icons"),
         },
         iconCustomizer(collection, _icon, props) {
-          if (collection === "ion") {
-            props.width = "1em";
-            props.height = "1em";
-          }
-
           if (collection === "app-icons") {
             props.width = "100%";
             props.height = "100%";

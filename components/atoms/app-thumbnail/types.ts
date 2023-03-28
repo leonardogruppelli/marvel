@@ -1,6 +1,6 @@
 import type { Image } from "~/types/common";
 
-export interface ThumbnailInterface {
+export interface ThumbnailProps {
   alt: string;
   thumbnail: Image;
 }

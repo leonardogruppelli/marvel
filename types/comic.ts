@@ -1,11 +1,11 @@
 import type { Base } from "~/types/common";
 
 export interface Comic extends Base {
-  prices: ComicPrice;
+  prices?: ComicPrice[];
   title: string;
 }
 
 export interface ComicPrice {
-  type: string;
+  type: "printPrice";
   price: number;
 }
