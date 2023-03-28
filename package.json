@@ -1,0 +1,20 @@
+{
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev -o",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "devDependencies": {
+    "@iconify-json/ion": "^1.1.9",
+    "@nuxtjs/tailwindcss": "^6.4.1",
+    "@pinia/nuxt": "^0.4.7",
+    "@types/node": "^18.15.10",
+    "nuxt": "^3.2.3",
+    "unplugin-icons": "^0.16.0",
+    "unplugin-vue-components": "^0.24.1",
+    "vite-plugin-vue-type-imports": "^0.2.4"
+  }
+}

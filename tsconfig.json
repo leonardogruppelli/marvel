@@ -1,0 +1,7 @@
+{
+  "extends": "./.nuxt/tsconfig.json",
+  "compilerOptions": {
+    "types": ["node", "unplugin-icons/types/vue3"]
+  },
+  "include": ["./.nuxt/nuxt.d.ts", "./**/*"]
+}

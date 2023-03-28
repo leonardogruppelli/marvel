@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: Oswald;
+  src: url("@/assets/fonts/light.woff2") format("woff2"),
+    url("@/assets/fonts/light.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Oswald;
+  src: url("@/assets/fonts/regular.woff2") format("woff2"),
+    url("@/assets/fonts/regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Oswald;
+  src: url("@/assets/fonts/bold.woff2") format("woff2"),
+    url("@/assets/fonts/bold.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer utilities {
+  .content {
+    @apply max-w-screen-xl px-2 mx-auto lg:px-4;
+  }
+
+  .text-fade {
+    @apply relative after:w-full after:absolute after:bottom-0 after:right-0 after:bg-gradient-to-r after:from-transparent after:to-white;
+  }
+}
