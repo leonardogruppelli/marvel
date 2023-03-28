@@ -28,9 +28,6 @@ module.exports = {
           to: { width: "100%", opacity: 0 },
         },
       },
-      screens: {
-        xs: "480px",
-      },
       spacing: {
         85: "21.25rem",
         90: "22.5rem",

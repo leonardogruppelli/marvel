@@ -16,7 +16,7 @@ const { data: characters } = await useApi<ApiResponse<Character[]>>(
     <li
       v-for="character in characters?.data.results"
       :key="character.id"
-      class="w-full max-w-full px-3 py-6 xs:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5"
+      class="w-full max-w-full px-3 py-6 sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5"
     >
       <app-card
         :description="character.description"
