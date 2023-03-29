@@ -1,15 +1,11 @@
 <script setup lang="ts">
 import type { CardProps } from "./types";
 
-const { add } = useCartStore();
+const { add, remove, quantity } = useCartStore();
 
 const props = defineProps<CardProps>();
 
-const price = computed<number | undefined>(() => props.prices?.[0].price);
-
-function addToCart() {
-  add(props);
-}
+const price = computed<number>(() => getPrice(props));
 </script>
 
 <template>
@@ -48,12 +44,26 @@ function addToCart() {
         {{ toUSD(price) }}
       </app-tag>
 
-      <app-button class="flex-1" @click="addToCart">
+      <app-button v-if="quantity(props)" class="flex-1">
+        <div class="w-full flex items-center justify-between relative z-10">
+          <button @click="remove(props)">
+            <ion-minus />
+          </button>
+
+          {{ quantity(props) }}
+
+          <button @click="add(props)">
+            <ion-plus />
+          </button>
+        </div>
+      </app-button>
+
+      <app-button v-else class="flex-1" @click="add(props)">
         <template #icon>
           <ion-cart />
         </template>
 
-        Buy
+        Add to Cart
       </app-button>
     </div>
   </div>

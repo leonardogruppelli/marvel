@@ -1,4 +1,7 @@
 export interface ButtonProps {
-  inverse?: boolean;
-  large?: boolean;
+  danger?: boolean;
+  full?: boolean;
+  info?: boolean;
+  success?: boolean;
+  warning?: boolean;
 }

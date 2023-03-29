@@ -12,7 +12,7 @@ const character = computed(() => data.value?.data.results[0]!);
 </script>
 
 <template>
-  <div class="py-6">
+  <div class="py-10">
     <div class="clear-both">
       <div class="w-2/5 float-left p-2 mr-10 border-2 border-red-500 shadow-xl">
         <div class="pb-2/3 relative">
