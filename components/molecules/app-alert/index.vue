@@ -1,20 +1,29 @@
 <script setup lang="ts">
+import { onClickOutside } from "@vueuse/core";
+
 import type { AlertProps, AlertEmits } from "./types";
 
 defineProps<AlertProps>();
 
 const emit = defineEmits<AlertEmits>();
 
+const content = ref<HTMLDivElement | null>(null);
+
 function close() {
   emit("close");
 }
+
+onClickOutside(content, close);
 </script>
 
 <template>
   <div v-if="open" class="w-screen h-screen fixed top-0 left-0 z-10">
-    <div class="w-full h-full bg-gray-800 bg-opacity-80" @click="close" />
+    <div class="w-full h-full bg-gray-800 bg-opacity-80" />
 
-    <div class="w-[480px] max-w-[80%] p-4 centered bg-gray-100 shadow">
+    <div
+      ref="content"
+      class="w-[480px] max-w-[80%] p-4 centered bg-gray-100 shadow"
+    >
       <div class="flex flex-col items-center p-10 border-2 border-red-500">
         <slot name="header">
           <h2 class="mb-6 text-3xl font-bold">Title</h2>

@@ -16,5 +16,8 @@
     "unplugin-icons": "^0.16.0",
     "unplugin-vue-components": "^0.24.1",
     "vite-plugin-vue-type-imports": "^0.2.4"
+  },
+  "dependencies": {
+    "@vueuse/core": "^9.13.0"
   }
 }
