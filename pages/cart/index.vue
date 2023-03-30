@@ -128,7 +128,7 @@ async function confirm() {
     </div>
 
     <div v-else class="max-w-lg flex flex-col items-center mx-auto text-center">
-      <ion-cart-outline class="w-56 h-56 mb-8 text-red-500" />
+      <ion-cart-outline class="w-40 h-40 mb-8 text-red-500" />
 
       <h2 class="mb-4 text-5xl font-bold">Your cart is empty</h2>
 
