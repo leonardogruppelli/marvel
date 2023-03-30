@@ -1,57 +1,30 @@
 <script setup lang="ts">
-import { Variant } from "~/types/variant";
-
-import type { AppAlert } from "~/.nuxt/components";
-
 useHead({
   title: "Marvel - Cart",
 });
-
-const cartStore = useCartStore();
-
-const { grouped, total } = storeToRefs(cartStore);
-
-const { add, remove, quantity, subtotal, buy } = cartStore;
-
-const alert = ref<InstanceType<typeof AppAlert> | null>(null);
-
-async function confirm() {
-  await buy();
-
-  alert.value?.close();
-}
 </script>
 
 <template>
   <div class="py-10">
-    <div
-      v-if="grouped.length"
-      class="flex flex-col gap-20 lg:flex-row lg:items-start"
-    >
+    <div v-if="false" class="flex flex-col gap-20 lg:flex-row lg:items-start">
       <div class="flex-[2]">
         <ul class="flex flex-col gap-14 lg:gap-6">
-          <li v-for="comic in grouped" :key="comic.id">
+          <li v-for="comic in []">
             <div
               class="flex flex-col items-center gap-4 lg:flex-row lg:items-start"
             >
               <div class="w-48 shrink-0 p-2 border-2 border-red-500 shadow-lg">
                 <div class="pb-2/3 relative">
-                  <app-thumbnail
-                    :thumbnail="comic.thumbnail"
-                    :alt="comic.title"
-                    class="w-full h-full absolute inset-0"
-                  />
+                  <app-thumbnail />
                 </div>
               </div>
 
               <div>
                 <div class="flex flex-col gap-1 mb-4">
-                  <h3 class="mb-1 text-lg font-bold">
-                    {{ comic.title }}
-                  </h3>
+                  <h3 class="mb-1 text-lg font-bold">Title</h3>
 
-                  <small v-if="comic.description" class="text-sm text-justify">
-                    {{ comic.description }}
+                  <small v-if="true" class="text-sm text-justify">
+                    Description
                   </small>
                 </div>
 
@@ -59,14 +32,12 @@ async function confirm() {
                   <div
                     class="h-10 px-4 flex items-center border border-r-0 border-red-500"
                   >
-                    <strong class="font-bold">{{
-                      toUSD(subtotal(comic))
-                    }}</strong>
+                    <strong class="font-bold"> $9,99 </strong>
                   </div>
 
                   <button
                     class="w-10 h-10 flex items-center justify-center border border-red-500"
-                    @click="remove(comic)"
+                    @click="undefined"
                   >
                     <ion-minus />
                   </button>
@@ -74,12 +45,12 @@ async function confirm() {
                   <strong
                     class="w-10 h-10 flex items-center justify-center border-y border-red-500 font-bold"
                   >
-                    {{ quantity(comic) }}
+                    1
                   </strong>
 
                   <button
                     class="w-10 h-10 flex items-center justify-center border border-red-500"
-                    @click="add(comic)"
+                    @click="undefined"
                   >
                     <ion-plus />
                   </button>
@@ -101,7 +72,7 @@ async function confirm() {
           <div class="flex items-center justify-between mb-2">
             <p>Subtotal:</p>
 
-            <strong class="font-bold">{{ toUSD(total) }}</strong>
+            <strong class="font-bold">$9,99</strong>
           </div>
 
           <div class="flex items-center justify-between">
@@ -114,10 +85,10 @@ async function confirm() {
         <div class="flex items-center justify-between mb-6">
           <strong class="font-bold">Total:</strong>
 
-          <strong class="text-lg font-bold">{{ toUSD(total) }}</strong>
+          <strong class="text-lg font-bold">$9,99</strong>
         </div>
 
-        <app-button :variant="Variant.Success" full @click="alert?.open">
+        <app-button>
           <template #icon>
             <ion-checkmark />
           </template>
@@ -167,32 +138,21 @@ async function confirm() {
           </h4>
 
           <ul class="mb-4 list-disc list-inside text-base text-red-500">
-            <li v-for="comic in grouped" :key="comic.id">
-              {{ comic.title }} [{{ quantity(comic) }}]
-            </li>
+            <li v-for="comic in []">Title [1]</li>
           </ul>
 
           <h4 class="mb-8">
             for the value of
-            <strong class="font-bold text-gray-900">{{ toUSD(total) }}</strong
-            >?
+            <strong class="font-bold text-gray-900">$9,99</strong>?
           </h4>
         </div>
       </template>
 
       <template #footer>
         <div class="w-full flex">
-          <app-button
-            :variant="Variant.Danger"
-            class="flex-1"
-            @click="alert?.close"
-          >
-            Cancel
-          </app-button>
+          <app-button class="flex-1"> Cancel </app-button>
 
-          <app-button :variant="Variant.Info" class="flex-1" @click="confirm">
-            Confirm
-          </app-button>
+          <app-button class="flex-1"> Confirm </app-button>
         </div>
       </template>
     </app-alert>

@@ -1,25 +1,11 @@
-<script setup lang="ts">
-import type { CardProps } from "./types";
-
-const { add, remove, quantity } = useCartStore();
-
-const props = defineProps<CardProps>();
-
-const price = computed<number>(() => getPrice(props));
-</script>
-
 <template>
   <div class="group">
-    <nuxt-link :to="props.to">
+    <nuxt-link to="/">
       <div
         class="p-2 mb-8 border-2 border-red-500 shadow-lg transition-all overflow-hidden group-hover:shadow-xl group-hover:translate-y-2"
       >
         <div class="pb-2/3 relative">
-          <app-thumbnail
-            :thumbnail="thumbnail"
-            :alt="title"
-            class="w-full h-full absolute inset-0 transition-transform group-hover:scale-110"
-          />
+          <app-thumbnail />
         </div>
       </div>
 
@@ -27,38 +13,35 @@ const price = computed<number>(() => getPrice(props));
         <h3
           class="max-h-[calc(theme(spacing.7)*2)] text-lg font-bold text-fade transition-colors overflow-hidden after:h-7 group-hover:text-red-500"
         >
-          {{ title }}
+          Title
         </h3>
 
         <small
-          v-if="description"
           class="max-h-[calc(theme(spacing.5)*3)] text-sm text-justify text-fade overflow-hidden after:h-5"
         >
-          {{ description }}
+          Description
         </small>
       </div>
     </nuxt-link>
 
-    <div v-if="price" class="flex">
-      <app-tag>
-        {{ toUSD(price) }}
-      </app-tag>
+    <div v-if="false" class="flex">
+      <app-tag>$9,99</app-tag>
 
-      <app-button v-if="quantity(props)" class="flex-1">
+      <app-button v-if="false" class="flex-1">
         <div class="w-full flex items-center justify-between relative z-10">
-          <button @click="remove(props)">
+          <button @click="undefined">
             <ion-minus />
           </button>
 
-          {{ quantity(props) }}
+          1
 
-          <button @click="add(props)">
+          <button @click="undefined">
             <ion-plus />
           </button>
         </div>
       </app-button>
 
-      <app-button v-else class="flex-1" @click="add(props)">
+      <app-button v-else class="flex-1">
         <template #icon>
           <ion-cart />
         </template>

@@ -1,58 +1,35 @@
-<script setup lang="ts">
-import type { ApiResponse } from "~/types/api";
-import type { Comic } from "~/types/comic";
-
-const route = useRoute();
-
-const { add, remove, quantity } = useCartStore();
-
-const { data } = await useApi<ApiResponse<Comic[]>>(
-  `/comics/${route.params.id}`
-);
-
-const comic = computed<Comic>(() => data.value?.data.results[0]!);
-
-const price = computed<number>(() => getPrice(comic.value));
-</script>
-
 <template>
   <div class="py-10">
     <div class="clear-both">
       <div class="w-2/5 float-left p-2 mr-10 border-2 border-red-500 shadow-xl">
         <div class="pb-2/3 relative">
-          <app-thumbnail
-            :alt="comic.title"
-            :thumbnail="comic.thumbnail"
-            class="w-full h-full absolute inset-0"
-          />
+          <app-thumbnail class="w-full h-full absolute inset-0" />
         </div>
       </div>
 
       <div class="flex flex-col gap-6">
-        <h1 class="text-4xl text-red-500">{{ comic.title }}</h1>
-        <p class="text-xl text-justify">{{ comic.description }}</p>
+        <h1 class="text-4xl text-red-500">Title</h1>
+        <p class="text-xl text-justify">Description</p>
       </div>
 
-      <div v-if="price" class="flex mt-8">
-        <app-tag>
-          {{ toUSD(price) }}
-        </app-tag>
+      <div v-if="false" class="flex mt-8">
+        <app-tag>$9,99</app-tag>
 
-        <app-button v-if="quantity(comic)">
+        <app-button v-if="false" class="flex-1">
           <div class="w-full flex items-center justify-between relative z-10">
-            <button @click="remove(comic)">
+            <button @click="undefined">
               <ion-minus />
             </button>
 
-            {{ quantity(comic) }}
+            1
 
-            <button @click="add(comic)">
+            <button @click="undefined">
               <ion-plus />
             </button>
           </div>
         </app-button>
 
-        <app-button v-else @click="add(comic)">
+        <app-button v-else class="flex-1">
           <template #icon>
             <ion-cart />
           </template>
