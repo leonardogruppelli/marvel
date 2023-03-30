@@ -4,11 +4,15 @@ import type { Comic } from "~/types/comic";
 
 const route = useRoute();
 
+const { add, remove, quantity } = useCartStore();
+
 const { data } = await useApi<ApiResponse<Comic[]>>(
   `/comics/${route.params.id}`
 );
 
-const comic = computed(() => data.value?.data.results[0]!);
+const comic = computed<Comic>(() => data.value?.data.results[0]!);
+
+const price = computed<number>(() => getPrice(comic.value));
 </script>
 
 <template>
@@ -27,6 +31,34 @@ const comic = computed(() => data.value?.data.results[0]!);
       <div class="flex flex-col gap-6">
         <h1 class="text-4xl text-red-500">{{ comic.title }}</h1>
         <p class="text-xl text-justify">{{ comic.description }}</p>
+      </div>
+
+      <div v-if="price" class="flex mt-8">
+        <app-tag>
+          {{ toUSD(price) }}
+        </app-tag>
+
+        <app-button v-if="quantity(comic)">
+          <div class="w-full flex items-center justify-between relative z-10">
+            <button @click="remove(comic)">
+              <ion-minus />
+            </button>
+
+            {{ quantity(comic) }}
+
+            <button @click="add(comic)">
+              <ion-plus />
+            </button>
+          </div>
+        </app-button>
+
+        <app-button v-else @click="add(comic)">
+          <template #icon>
+            <ion-cart />
+          </template>
+
+          Add to Cart
+        </app-button>
       </div>
     </div>
   </div>

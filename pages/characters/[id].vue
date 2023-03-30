@@ -8,7 +8,7 @@ const { data } = await useApi<ApiResponse<Character[]>>(
   `/characters/${route.params.id}`
 );
 
-const character = computed(() => data.value?.data.results[0]!);
+const character = computed<Character>(() => data.value?.data.results[0]!);
 </script>
 
 <template>
