@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { Variant } from "~/types/variant";
 
+import type { ButtonHTMLAttributes } from "vue";
 import type { ButtonProps } from "./types";
 
 const props = defineProps<ButtonProps>();
 
-const attrs = useAttrs();
+const attrs: ButtonHTMLAttributes = useAttrs();
 
 const element = computed<string>(() => (attrs.onClick ? "button" : "div"));
 </script>
