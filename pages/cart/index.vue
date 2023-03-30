@@ -159,20 +159,20 @@ async function confirm() {
       </nuxt-link>
     </div>
 
-    <app-alert :open="alertOpen">
+    <app-alert :open="alertOpen" @close="closeAlert">
       <template #header>
         <h2 class="mb-6 text-3xl font-bold">Confirm purchase</h2>
       </template>
 
       <template #body>
-        <div class="flex flex-col items-center text-xl text-gray-800">
+        <div class="flex flex-col text-xl text-gray-800">
           <h4 class="mb-4">
             Do you confirm the purchase of the following items:
           </h4>
 
-          <ul class="mb-4 list-disc list-inside">
+          <ul class="mb-4 list-disc list-inside text-base text-red-500">
             <li v-for="comic in grouped" :key="comic.id">
-              {{ comic.title }}
+              {{ comic.title }} [{{ quantity(comic) }}]
             </li>
           </ul>
 

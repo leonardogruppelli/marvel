@@ -12,10 +12,10 @@ function close() {
 
 <template>
   <div v-if="open" class="w-screen h-screen fixed top-0 left-0 z-10">
-    <div class="w-full h-full bg-gray-800 bg-opacity-80" />
+    <div class="w-full h-full bg-gray-800 bg-opacity-80" @click="close" />
 
-    <div class="w-[480px] max-w-[80%] p-2 centered bg-gray-100 shadow">
-      <div class="flex flex-col items-center p-8 border-2 border-gray-800">
+    <div class="w-[480px] max-w-[80%] p-4 centered bg-gray-100 shadow">
+      <div class="flex flex-col items-center p-10 border-2 border-red-500">
         <slot name="header">
           <h2 class="mb-6 text-3xl font-bold">Title</h2>
         </slot>
@@ -36,6 +36,13 @@ function close() {
           </div>
         </slot>
       </div>
+
+      <button
+        class="p-2 absolute top-0 right-0 bg-gray-900 border border-red-500 rounded-full text-red-500 translate-x-1/2 -translate-y-1/2"
+        @click="close"
+      >
+        <ion-close class="w-8 h-8" />
+      </button>
     </div>
   </div>
 </template>
