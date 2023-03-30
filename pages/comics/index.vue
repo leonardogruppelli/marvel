@@ -6,7 +6,13 @@ useHead({
   title: "Marvel - Comics",
 });
 
-const { data: comics } = await useApi<ApiResponse<Comic[]>>("/comics");
+const limit: number = 100;
+
+const { data: comics } = await useApi<ApiResponse<Comic[]>>("/comics", {
+  query: {
+    limit,
+  },
+});
 </script>
 
 <template>

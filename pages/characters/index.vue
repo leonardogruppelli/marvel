@@ -6,8 +6,15 @@ useHead({
   title: "Marvel - Characters",
 });
 
+const limit: number = 100;
+
 const { data: characters } = await useApi<ApiResponse<Character[]>>(
-  "/characters"
+  "/characters",
+  {
+    query: {
+      limit,
+    },
+  }
 );
 </script>
 

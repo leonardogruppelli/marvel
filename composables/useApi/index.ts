@@ -16,9 +16,10 @@ export function useApi<Response>(
   >(url, {
     baseURL: config.public.apiBaseUrl,
     key: url,
+    ...options,
     query: {
       apikey: config.public.apiPublicKey,
+      ...options?.query,
     },
-    ...options,
   });
 }
