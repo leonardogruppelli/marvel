@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { Variant } from "~/types/variant";
+
 useHead({
   title: "Marvel - Cart",
 });
@@ -121,7 +123,7 @@ async function confirm() {
           <strong class="text-lg font-bold">{{ toUSD(total) }}</strong>
         </div>
 
-        <app-button full success @click="openAlert">
+        <app-button :variant="Variant.Success" full @click="openAlert">
           <template #icon>
             <ion-checkmark />
           </template>
@@ -186,10 +188,17 @@ async function confirm() {
 
       <template #footer>
         <div class="w-full flex">
-          <app-button class="flex-1" danger @click="closeAlert"
-            >Cancel</app-button
+          <app-button
+            :variant="Variant.Danger"
+            class="flex-1"
+            @click="closeAlert"
           >
-          <app-button class="flex-1" info @click="confirm">Confirm</app-button>
+            Cancel
+          </app-button>
+
+          <app-button :variant="Variant.Info" class="flex-1" @click="confirm">
+            Confirm
+          </app-button>
         </div>
       </template>
     </app-alert>

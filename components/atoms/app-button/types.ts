@@ -1,7 +1,6 @@
+import { Variant } from "~/types/variant";
+
 export interface ButtonProps {
-  danger?: boolean;
   full?: boolean;
-  info?: boolean;
-  success?: boolean;
-  warning?: boolean;
+  variant?: Variant;
 }
