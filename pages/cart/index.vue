@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { Variant } from "~/types/variant";
 
+import type { AppAlert } from "~/.nuxt/components";
+
 useHead({
   title: "Marvel - Cart",
 });
@@ -11,20 +13,12 @@ const { grouped, total } = storeToRefs(cartStore);
 
 const { add, remove, quantity, subtotal, buy } = cartStore;
 
-const alertOpen = ref<boolean>(false);
-
-function openAlert() {
-  alertOpen.value = true;
-}
-
-function closeAlert() {
-  alertOpen.value = false;
-}
+const alert = ref<InstanceType<typeof AppAlert> | null>(null);
 
 async function confirm() {
   await buy();
 
-  closeAlert();
+  alert.value?.close();
 }
 </script>
 
@@ -123,7 +117,7 @@ async function confirm() {
           <strong class="text-lg font-bold">{{ toUSD(total) }}</strong>
         </div>
 
-        <app-button :variant="Variant.Success" full @click="openAlert">
+        <app-button :variant="Variant.Success" full @click="alert?.open">
           <template #icon>
             <ion-checkmark />
           </template>
@@ -161,7 +155,7 @@ async function confirm() {
       </nuxt-link>
     </div>
 
-    <app-alert :open="alertOpen" @close="closeAlert">
+    <app-alert ref="alert">
       <template #header>
         <h2 class="mb-6 text-3xl font-bold">Confirm purchase</h2>
       </template>
@@ -191,7 +185,7 @@ async function confirm() {
           <app-button
             :variant="Variant.Danger"
             class="flex-1"
-            @click="closeAlert"
+            @click="alert?.close"
           >
             Cancel
           </app-button>

@@ -1,23 +1,28 @@
 <script setup lang="ts">
 import { onClickOutside } from "@vueuse/core";
 
-import type { AlertProps, AlertEmits } from "./types";
-
-defineProps<AlertProps>();
-
-const emit = defineEmits<AlertEmits>();
+const isOpen = ref<boolean>(false);
 
 const content = ref<HTMLDivElement | null>(null);
 
+function open() {
+  isOpen.value = true;
+}
+
 function close() {
-  emit("close");
+  isOpen.value = false;
 }
 
 onClickOutside(content, close);
+
+defineExpose({
+  open,
+  close,
+});
 </script>
 
 <template>
-  <div v-if="open" class="w-screen h-screen fixed top-0 left-0 z-10">
+  <div v-if="isOpen" class="w-screen h-screen fixed top-0 left-0 z-10">
     <div class="w-full h-full bg-gray-800 bg-opacity-80" />
 
     <div
