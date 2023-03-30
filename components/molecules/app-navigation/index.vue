@@ -6,14 +6,6 @@ const routes = [
     name: "index",
     label: "Home",
   },
-  {
-    name: "comics",
-    label: "Comics",
-  },
-  {
-    name: "characters",
-    label: "Characters",
-  },
 ];
 
 function active(name: string): boolean {
