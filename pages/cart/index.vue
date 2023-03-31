@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { EVariant } from "~/types/variant";
+
 import type { AppAlert } from "~/.nuxt/components";
 
 useHead({
@@ -113,7 +115,7 @@ async function confirm(): Promise<void> {
           <strong class="text-lg font-bold">{{ toUSD(total) }}</strong>
         </div>
 
-        <app-button @click="alert?.open()">
+        <app-button :variant="EVariant.Success" full @click="alert?.open()">
           <template #icon>
             <ion-checkmark />
           </template>
@@ -178,11 +180,17 @@ async function confirm(): Promise<void> {
 
       <template #footer>
         <div class="w-full flex">
-          <app-button class="flex-1" @click="alert?.close()">
+          <app-button
+            :variant="EVariant.Danger"
+            class="flex-1"
+            @click="alert?.close()"
+          >
             Cancel
           </app-button>
 
-          <app-button class="flex-1" @click="confirm"> Confirm </app-button>
+          <app-button :variant="EVariant.Info" class="flex-1" @click="confirm">
+            Confirm
+          </app-button>
         </div>
       </template>
     </app-alert>
