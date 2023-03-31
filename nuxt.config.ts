@@ -22,6 +22,7 @@ export default defineNuxtConfig({
         autoImports: ["defineStore", "storeToRefs"],
       },
     ],
+    "vite-plugin-vue-type-imports/nuxt",
   ],
   runtimeConfig: {
     public: {
