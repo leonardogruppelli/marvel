@@ -1,3 +1,9 @@
+<script setup lang="ts">
+import type { ICardProps } from "./types";
+
+const props = defineProps<ICardProps>();
+</script>
+
 <template>
   <div class="group">
     <nuxt-link to="/">
@@ -13,13 +19,13 @@
         <h3
           class="max-h-[calc(theme(spacing.7)*2)] text-lg font-bold text-fade transition-colors overflow-hidden after:h-7 group-hover:text-red-500"
         >
-          Title
+          {{ title }}
         </h3>
 
         <small
           class="max-h-[calc(theme(spacing.5)*3)] text-sm text-justify text-fade overflow-hidden after:h-5"
         >
-          Description
+          {{ description }}
         </small>
       </div>
     </nuxt-link>

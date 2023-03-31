@@ -24,8 +24,13 @@ console.log(comics.value?.data.results);
       v-for="comic in comics?.data.results"
       class="w-full max-w-full px-3 py-6 sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5"
     >
-      {{ comic.title }}
-      <app-card />
+      <app-card
+        :to="{ name: 'comics-id', params: { id: comic.id } }"
+        :title="comic.title"
+        :description="comic.description"
+        :thumbnail="comic.thumbnail"
+        :prices="comic.prices"
+      />
     </li>
   </ul>
 </template>
