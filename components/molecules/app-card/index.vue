@@ -6,7 +6,7 @@ const props = defineProps<ICardProps>();
 
 <template>
   <div class="group">
-    <nuxt-link to="/">
+    <nuxt-link :to="to">
       <div
         class="p-2 mb-8 border-2 border-red-500 shadow-lg transition-all overflow-hidden group-hover:shadow-xl group-hover:translate-y-2"
       >

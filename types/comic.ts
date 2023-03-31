@@ -1,11 +1,8 @@
-import type { IThumbnail } from "./thumbnail";
+import type { IBase } from "./common";
 
-export interface IComic {
-  id: number;
+export interface IComic extends IBase {
   title: string;
-  description: string | null;
   prices: IComicPrice[];
-  thumbnail: IThumbnail;
 }
 
 export interface IComicPrice {
