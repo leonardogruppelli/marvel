@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import type { ICardProps } from "./types";
 
+const { add, remove } = useCartStore();
+
 const props = defineProps<ICardProps>();
 
 const price = computed<number>(() => getPrice(props));
@@ -53,7 +55,7 @@ const price = computed<number>(() => getPrice(props));
         </div>
       </app-button>
 
-      <app-button v-else class="flex-1">
+      <app-button v-else class="flex-1" @click="add(props)">
         <template #icon>
           <ion-cart />
         </template>

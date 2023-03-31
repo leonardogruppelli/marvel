@@ -1,3 +1,9 @@
+<script setup lang="ts">
+const cartStore = useCartStore();
+
+const { cart } = storeToRefs(cartStore);
+</script>
+
 <template>
   <header class="w-full sticky top-0 left-0 bg-gray-900 text-gray-100 z-10">
     <div class="content">
@@ -8,7 +14,7 @@
           <div class="p-2 relative">
             <ion-cart class="w-8 h-8" />
 
-            <app-badge v-if="false" label="1" />
+            <app-badge v-if="cart.length">{{ cart.length }}</app-badge>
           </div>
         </nuxt-link>
       </div>

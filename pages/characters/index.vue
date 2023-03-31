@@ -19,6 +19,7 @@ const { data: characters } = await useApi<IApiResponse<ICharacter[]>>(
     >
       <app-card
         :to="{ name: 'characters-id', params: { id: character.id } }"
+        :id="character.id"
         :title="character.name"
         :description="character.description"
         :thumbnail="character.thumbnail"

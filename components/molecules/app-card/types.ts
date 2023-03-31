@@ -3,6 +3,7 @@ import type { IThumbnail } from "~/types/thumbnail";
 import type { IComicPrice } from "~~/types/comic";
 
 export interface ICardProps {
+  id: number;
   title: string;
   description: string | null;
   thumbnail: IThumbnail;

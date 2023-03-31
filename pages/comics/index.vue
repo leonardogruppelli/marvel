@@ -17,6 +17,7 @@ const { data: comics } = await useApi<IApiResponse<IComic[]>>("/comics");
     >
       <app-card
         :to="{ name: 'comics-id', params: { id: comic.id } }"
+        :id="comic.id"
         :title="comic.title"
         :description="comic.description"
         :thumbnail="comic.thumbnail"
