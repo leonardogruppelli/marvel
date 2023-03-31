@@ -11,7 +11,11 @@ const props = defineProps<ICardProps>();
         class="p-2 mb-8 border-2 border-red-500 shadow-lg transition-all overflow-hidden group-hover:shadow-xl group-hover:translate-y-2"
       >
         <div class="pb-2/3 relative">
-          <app-thumbnail />
+          <app-thumbnail
+            :alt="title"
+            :thumbnail="thumbnail"
+            class="w-full h-full absolute inset-0 transition-transform group-hover:scale-110"
+          />
         </div>
       </div>
 
