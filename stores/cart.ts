@@ -5,6 +5,17 @@ export const useCartStore = defineStore("cart", () => {
     default: () => [],
   });
 
+  const grouped = computed<IComic[]>(() =>
+    cart.value.filter(
+      (value, index, self) =>
+        index === self.findIndex((item) => item.id === value.id)
+    )
+  );
+
+  const total = computed<number>(() =>
+    cart.value.reduce((acc, value) => acc + getPrice(value), 0)
+  );
+
   function add(comic: IComic): void {
     cart.value.push(comic);
   }
@@ -20,10 +31,17 @@ export const useCartStore = defineStore("cart", () => {
     return cart.value.filter((item) => item.id === comic.id).length;
   }
 
+  function subtotal(comic: IComic): number {
+    return quantity(comic) * getPrice(comic);
+  }
+
   return {
     cart,
+    grouped,
+    total,
     add,
     remove,
     quantity,
+    subtotal,
   };
 });

@@ -2,29 +2,42 @@
 useHead({
   title: "Marvel - Cart",
 });
+
+const cartStore = useCartStore();
+
+const { grouped, total } = storeToRefs(cartStore);
+
+const { add, remove, quantity, subtotal } = cartStore;
 </script>
 
 <template>
   <div class="py-10">
-    <div v-if="false" class="flex flex-col gap-20 lg:flex-row lg:items-start">
+    <div
+      v-if="grouped.length"
+      class="flex flex-col gap-20 lg:flex-row lg:items-start"
+    >
       <div class="flex-[2]">
         <ul class="flex flex-col gap-14 lg:gap-6">
-          <li v-for="comic in []">
+          <li v-for="comic in grouped" :key="comic.id">
             <div
               class="flex flex-col items-center gap-4 lg:flex-row lg:items-start"
             >
               <div class="w-48 shrink-0 p-2 border-2 border-red-500 shadow-lg">
                 <div class="pb-2/3 relative">
-                  <app-thumbnail />
+                  <app-thumbnail
+                    :alt="comic.title"
+                    :thumbnail="comic.thumbnail"
+                    class="w-full h-full absolute inset-0"
+                  />
                 </div>
               </div>
 
               <div>
                 <div class="flex flex-col gap-1 mb-4">
-                  <h3 class="mb-1 text-lg font-bold">Title</h3>
+                  <h3 class="mb-1 text-lg font-bold">{{ comic.title }}</h3>
 
-                  <small v-if="true" class="text-sm text-justify">
-                    Description
+                  <small v-if="comic.description" class="text-sm text-justify">
+                    {{ trim(comic.description) }}
                   </small>
                 </div>
 
@@ -32,12 +45,14 @@ useHead({
                   <div
                     class="h-10 px-4 flex items-center border border-r-0 border-red-500"
                   >
-                    <strong class="font-bold"> $9,99 </strong>
+                    <strong class="font-bold">{{
+                      toUSD(subtotal(comic))
+                    }}</strong>
                   </div>
 
                   <button
                     class="w-10 h-10 flex items-center justify-center border border-red-500"
-                    @click="undefined"
+                    @click="remove(comic)"
                   >
                     <ion-minus />
                   </button>
@@ -45,12 +60,12 @@ useHead({
                   <strong
                     class="w-10 h-10 flex items-center justify-center border-y border-red-500 font-bold"
                   >
-                    1
+                    {{ quantity(comic) }}
                   </strong>
 
                   <button
                     class="w-10 h-10 flex items-center justify-center border border-red-500"
-                    @click="undefined"
+                    @click="add(comic)"
                   >
                     <ion-plus />
                   </button>
@@ -72,7 +87,7 @@ useHead({
           <div class="flex items-center justify-between mb-2">
             <p>Subtotal:</p>
 
-            <strong class="font-bold">$9,99</strong>
+            <strong class="font-bold">{{ toUSD(total) }}</strong>
           </div>
 
           <div class="flex items-center justify-between">
@@ -85,7 +100,7 @@ useHead({
         <div class="flex items-center justify-between mb-6">
           <strong class="font-bold">Total:</strong>
 
-          <strong class="text-lg font-bold">$9,99</strong>
+          <strong class="text-lg font-bold">{{ toUSD(total) }}</strong>
         </div>
 
         <app-button>

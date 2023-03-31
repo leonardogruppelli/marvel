@@ -2,6 +2,8 @@
 import type { IApiResponse } from "~/types/api";
 import type { IComic } from "~/types/comic";
 
+const { add, remove, quantity } = useCartStore();
+
 const route = useRoute();
 
 const { data } = await useApi<IApiResponse<IComic[]>>(
@@ -9,6 +11,8 @@ const { data } = await useApi<IApiResponse<IComic[]>>(
 );
 
 const comic = computed<IComic>(() => data.value?.data.results[0]!);
+
+const price = computed<number>(() => getPrice(comic.value));
 </script>
 
 <template>
@@ -29,24 +33,24 @@ const comic = computed<IComic>(() => data.value?.data.results[0]!);
         <p class="text-xl text-justify">{{ trim(comic.description) }}</p>
       </div>
 
-      <div v-if="false" class="flex mt-8">
-        <app-tag>$9,99</app-tag>
+      <div v-if="price" class="flex mt-8">
+        <app-tag>{{ toUSD(price) }}</app-tag>
 
-        <app-button v-if="false" class="flex-1">
+        <app-button v-if="quantity(comic)" class="flex-1">
           <div class="w-full flex items-center justify-between relative z-10">
-            <button @click="undefined">
+            <button @click="remove(comic)">
               <ion-minus />
             </button>
 
-            1
+            {{ quantity(comic) }}
 
-            <button @click="undefined">
+            <button @click="add(comic)">
               <ion-plus />
             </button>
           </div>
         </app-button>
 
-        <app-button v-else class="flex-1">
+        <app-button v-else class="flex-1" @click="add(comic)">
           <template #icon>
             <ion-cart />
           </template>
