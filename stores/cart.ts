@@ -16,9 +16,14 @@ export const useCartStore = defineStore("cart", () => {
     );
   }
 
+  function quantity(comic: IComic): number {
+    return cart.value.filter((item) => item.id === comic.id).length;
+  }
+
   return {
     cart,
     add,
     remove,
+    quantity,
   };
 });

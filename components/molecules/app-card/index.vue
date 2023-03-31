@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { ICardProps } from "./types";
 
-const { add, remove } = useCartStore();
+const { add, remove, quantity } = useCartStore();
 
 const props = defineProps<ICardProps>();
 
@@ -41,15 +41,15 @@ const price = computed<number>(() => getPrice(props));
     <div v-if="price" class="flex">
       <app-tag>{{ toUSD(price) }}</app-tag>
 
-      <app-button v-if="false" class="flex-1">
+      <app-button v-if="quantity(props)" class="flex-1">
         <div class="w-full flex items-center justify-between relative z-10">
-          <button @click="undefined">
+          <button @click="remove(props)">
             <ion-minus />
           </button>
 
-          1
+          {{ quantity(props) }}
 
-          <button @click="undefined">
+          <button @click="add(props)">
             <ion-plus />
           </button>
         </div>
