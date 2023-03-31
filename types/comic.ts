@@ -2,7 +2,7 @@ import type { IBase } from "./common";
 
 export interface IComic extends IBase {
   title: string;
-  prices: IComicPrice[];
+  prices?: IComicPrice[];
 }
 
 export interface IComicPrice {

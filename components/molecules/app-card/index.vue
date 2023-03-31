@@ -2,6 +2,8 @@
 import type { ICardProps } from "./types";
 
 const props = defineProps<ICardProps>();
+
+const price = computed<number>(() => getPrice(props));
 </script>
 
 <template>
@@ -34,8 +36,8 @@ const props = defineProps<ICardProps>();
       </div>
     </nuxt-link>
 
-    <div v-if="false" class="flex">
-      <app-tag>$9,99</app-tag>
+    <div v-if="price" class="flex">
+      <app-tag>{{ toUSD(price) }}</app-tag>
 
       <app-button v-if="false" class="flex-1">
         <div class="w-full flex items-center justify-between relative z-10">
