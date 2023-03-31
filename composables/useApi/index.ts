@@ -1,17 +1,10 @@
-import type { UseFetchOptions } from "#app";
+import type { TUseApiOptions } from "./types";
 import type { NitroFetchRequest } from "nitropack";
 import type { FetchError } from "ofetch";
-import type { KeysOf } from "nuxt/dist/app/composables/asyncData";
 
 export function useApi<IResponse>(
   url: string,
-  options: UseFetchOptions<
-    IResponse extends void ? unknown : IResponse,
-    IResponse extends void ? unknown : IResponse,
-    KeysOf<IResponse extends void ? unknown : IResponse>,
-    NitroFetchRequest,
-    "get" | "post" | "put" | "delete"
-  >
+  options?: TUseApiOptions<IResponse>
 ) {
   const config = useRuntimeConfig();
 
@@ -26,7 +19,7 @@ export function useApi<IResponse>(
     ...options,
     query: {
       apikey: config.public.apiPublicKey,
-      ...options.query,
+      ...options?.query,
     },
   });
 }

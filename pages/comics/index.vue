@@ -6,16 +6,7 @@ useHead({
   title: "Marvel - Comics",
 });
 
-const { data: comics } = await useFetch<IApiResponse<IComic[]>>(
-  "https://gateway.marvel.com/v1/public/comics",
-  {
-    query: {
-      apikey: "004423c7c59e69f3f3fbde8abbbc78be",
-    },
-  }
-);
-
-console.log(comics.value?.data.results);
+const { data: comics } = await useApi<IApiResponse<IComic[]>>("/comics");
 </script>
 
 <template>

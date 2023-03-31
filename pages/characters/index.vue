@@ -6,13 +6,8 @@ useHead({
   title: "Marvel - Characters",
 });
 
-const { data: characters } = await useFetch<IApiResponse<ICharacter[]>>(
-  "https://gateway.marvel.com/v1/public/characters",
-  {
-    query: {
-      apikey: "004423c7c59e69f3f3fbde8abbbc78be",
-    },
-  }
+const { data: characters } = await useApi<IApiResponse<ICharacter[]>>(
+  "/characters"
 );
 </script>
 
