@@ -29,7 +29,7 @@ const props = defineProps<ICardProps>();
         <small
           class="max-h-[calc(theme(spacing.5)*3)] text-sm text-justify text-fade overflow-hidden after:h-5"
         >
-          {{ description }}
+          {{ trim(description) }}
         </small>
       </div>
     </nuxt-link>
