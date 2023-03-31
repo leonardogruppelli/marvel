@@ -35,6 +35,12 @@ export const useCartStore = defineStore("cart", () => {
     return quantity(comic) * getPrice(comic);
   }
 
+  async function buy(): Promise<void> {
+    cart.value = [];
+
+    await navigateTo({ name: "comics" });
+  }
+
   return {
     cart,
     grouped,
@@ -43,5 +49,6 @@ export const useCartStore = defineStore("cart", () => {
     remove,
     quantity,
     subtotal,
+    buy,
   };
 });

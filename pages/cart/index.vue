@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { AppAlert } from "~/.nuxt/components";
+
 useHead({
   title: "Marvel - Cart",
 });
@@ -7,7 +9,15 @@ const cartStore = useCartStore();
 
 const { grouped, total } = storeToRefs(cartStore);
 
-const { add, remove, quantity, subtotal } = cartStore;
+const { add, remove, quantity, subtotal, buy } = cartStore;
+
+const alert = ref<InstanceType<typeof AppAlert> | null>(null);
+
+async function confirm(): Promise<void> {
+  await buy();
+
+  alert.value?.close();
+}
 </script>
 
 <template>
@@ -103,7 +113,7 @@ const { add, remove, quantity, subtotal } = cartStore;
           <strong class="text-lg font-bold">{{ toUSD(total) }}</strong>
         </div>
 
-        <app-button>
+        <app-button @click="alert?.open()">
           <template #icon>
             <ion-checkmark />
           </template>
@@ -153,21 +163,26 @@ const { add, remove, quantity, subtotal } = cartStore;
           </h4>
 
           <ul class="mb-4 list-disc list-inside text-base text-red-500">
-            <li v-for="comic in []">Title [1]</li>
+            <li v-for="comic in grouped">
+              {{ comic.title }} [{{ quantity(comic) }}]
+            </li>
           </ul>
 
           <h4 class="mb-8">
             for the value of
-            <strong class="font-bold text-gray-900">$9,99</strong>?
+            <strong class="font-bold text-gray-900">{{ toUSD(total) }}</strong
+            >?
           </h4>
         </div>
       </template>
 
       <template #footer>
         <div class="w-full flex">
-          <app-button class="flex-1"> Cancel </app-button>
+          <app-button class="flex-1" @click="alert?.close()">
+            Cancel
+          </app-button>
 
-          <app-button class="flex-1"> Confirm </app-button>
+          <app-button class="flex-1" @click="confirm"> Confirm </app-button>
         </div>
       </template>
     </app-alert>

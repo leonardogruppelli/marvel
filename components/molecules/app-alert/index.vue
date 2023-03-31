@@ -1,5 +1,28 @@
+<script setup lang="ts">
+import { onClickOutside } from "@vueuse/core";
+
+const isOpen = ref<boolean>(false);
+
+const content = ref<HTMLDivElement | null>(null);
+
+function open(): void {
+  isOpen.value = true;
+}
+
+function close(): void {
+  isOpen.value = false;
+}
+
+onClickOutside(content, close);
+
+defineExpose({
+  open,
+  close,
+});
+</script>
+
 <template>
-  <div v-if="false" class="w-screen h-screen fixed top-0 left-0 z-10">
+  <div v-if="isOpen" class="w-screen h-screen fixed top-0 left-0 z-10">
     <div class="w-full h-full bg-gray-800 bg-opacity-80" />
 
     <div
@@ -25,6 +48,7 @@
 
       <button
         class="p-2 absolute top-0 right-0 bg-gray-900 border border-red-500 rounded-full text-red-500 translate-x-1/2 -translate-y-1/2"
+        @click="close"
       >
         <ion-close class="w-8 h-8" />
       </button>
